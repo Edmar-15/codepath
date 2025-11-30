@@ -79,6 +79,13 @@
     </div>
   </section>
 
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <button id="themeToggle" class="theme-btn">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -87,6 +94,43 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const themeToggle = document.getElementById('themeToggle');
+
+      if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+
+        if (currentTheme === 'light') {
+          document.body.classList.add('light-theme');
+          themeIcon.className = 'fas fa-sun';
+          themeIcon.style.color = '#f59e0b';
+        } else {
+          document.body.classList.remove('light-theme');
+          themeIcon.className = 'fas fa-moon';
+          themeIcon.style.color = 'white';
+        }
+
+        // Theme toggle click event
+        themeToggle.addEventListener('click', function () {
+          document.body.classList.toggle('light-theme');
+
+          if (document.body.classList.contains('light-theme')) {
+            localStorage.setItem('theme', 'light');
+            themeIcon.className = 'fas fa-sun';
+            themeIcon.style.color = '#f59e0b';
+          } else {
+            localStorage.setItem('theme', 'dark');
+            themeIcon.className = 'fas fa-moon';
+            themeIcon.style.color = 'white';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

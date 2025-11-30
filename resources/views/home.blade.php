@@ -7,7 +7,7 @@
   <title>CodePath - Learn Programming Languages</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  @vite(['resources/css/app.css', 'resources/js/home.js'])
+  @vite(['resources/css/style.css', 'resources/js/home.js'])
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Enhanced Features CSS */
@@ -331,5 +331,80 @@
     <div class="container">
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const themeToggle = document.getElementById('themeToggle');
+
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeIcon.className = 'fas fa-sun';
+            themeIcon.style.color = '#f59e0b';
+        } else {
+            document.body.classList.remove('light-theme');
+            themeIcon.className = 'fas fa-moon';
+            themeIcon.style.color = 'white';
+        }
+
+        // Theme toggle click event
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('light-theme');
+
+            if (document.body.classList.contains('light-theme')) {
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fas fa-sun';
+                themeIcon.style.color = '#f59e0b';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fas fa-moon';
+                themeIcon.style.color = 'white';
+            }
+        });
+    }
+
+    // Progress bars animation
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBars = entry.target.querySelectorAll('.progress-fill');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 300);
+                });
+            }
+        });
+    }, observerOptions);
+
+    const featuresSection = document.querySelector('.features-section');
+    if (featuresSection) {
+        observer.observe(featuresSection);
+    }
+
+    // Card hover effects
+    document.querySelectorAll('.course-card, .language-card, .feature-card').forEach(card => {
+        card.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+
+        card.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    console.log('CodePath JavaScript loaded successfully!');
+});
+</script>
 </body>
 </html>
