@@ -7,7 +7,6 @@
   <title>CodePath - Learn Programming Languages</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  @vite(['resources/css/style.css', 'resources/js/home.js'])
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Enhanced Features CSS */
@@ -39,7 +38,7 @@
       <p>Learn to code with our comprehensive courses, interactive exercises, and real-world projects. Start your
         journey to becoming a software developer today!</p>
       <div class="hero-btns">
-        <a href="#" class="btn">Get Started Free</a>
+        <a href="{{ route('login') }}" class="btn">Get Started Free</a>
         <a href="#courses" class="btn">Browse Courses</a>
       </div>
     </div>
@@ -139,7 +138,7 @@
             </div>
             <div class="course-footer">
               <span class="price">Free</span>
-              <a href="#" class="btn">Start Learning</a>
+                 <a href="{{ url('/html-course') }}" class="btn">Start Learning</a> 
             </div>
           </div>
         </div>
